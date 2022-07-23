@@ -11,29 +11,6 @@
     "name": "Cobilas CTB"
   },
   
-  "gitDependencies": {
-    "com.cobilas.cobilascore": {
-		"type" : "github",
-		"version" : "1.0.0",
-		"userName" : "BelicusBr"
-	},
-    "com.cobilas.unity.management.runtime": {
-		"type" : "github",
-		"version" : "1.0.0",
-		"userName" : "BelicusBr"
-	},
-    "com.cobilas.unity.utility": {
-		"type" : "github",
-		"version" : "1.0.0",
-		"userName" : "BelicusBr"
-	},
-    "com.cobilas.unity.management.build": {
-		"type" : "github",
-		"version" : "1.0.0",
-		"userName" : "BelicusBr"
-	}
-  },
-  
   "repository": {
     "url" : "https://github.com/BelicusBr/com.cobilas.unity.management.resource.git",
     "type" : "git"
