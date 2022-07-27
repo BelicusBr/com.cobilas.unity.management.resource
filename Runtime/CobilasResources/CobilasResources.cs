@@ -60,6 +60,8 @@ namespace Cobilas.Unity.Management.Resources {
                     if (pm == PlayModeStateChange.EnteredPlayMode)
                         RefreshResourcesPaths();
             };
+            DescarregarAtivo(Prefabs);
+            Init();
         }
 
         [MenuItem("Tools/Cobilas/Refresh Resources paths")]

@@ -1,4 +1,9 @@
 # Changelog
+## [1.0.5] 27/07/2022
+- Fix CHANGELOG.md
+- Fix package.json
+- Fix CobilasResources.cs
+- > As instruções `void DescarregarAtivo(Prefabs); void Init();` foram adicionados o a método `private static void InitEditor();`.
 ## [1.0.4] 23/07/2022
 - Fix Runtime/DependencyWarning.cs
 - Add CHANGELOG.md
