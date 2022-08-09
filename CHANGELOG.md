@@ -1,4 +1,7 @@
 # Changelog
+## [1.0.7] 09/08/2022
+- Change CHANGELOG.md
+- Change Runtime\CobilasResources\CobilasResources.cs
 ## [1.0.7] 08/08/2022
 - Fix CHANGELOG.md
 - Fix package.json

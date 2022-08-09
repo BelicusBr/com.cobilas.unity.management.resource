@@ -31,11 +31,11 @@ namespace Cobilas.Unity.Management.Resources {
         [InitializeOnLoadMethod]
         private static void Editor_Refresh() {
             CobilasBuildProcessor.EventOnPreprocessBuild += (pp, br) => {
-                if (pp == CobilasEditorProcessor.PriorityProcessor.High)
+                if (pp == CobilasEditorProcessor.PriorityProcessor.Middle)
                     Refresh();
             };
             CobilasEditorProcessor.playModeStateChanged += (pp, pm) => {
-                if (pp == CobilasEditorProcessor.PriorityProcessor.High &&
+                if (pp == CobilasEditorProcessor.PriorityProcessor.Middle &&
                 pm == PlayModeStateChange.EnteredPlayMode)
                     Refresh();
             };
