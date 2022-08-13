@@ -1,4 +1,8 @@
 # Changelog
+## [1.0.7] 13/08/2022
+- Change Editor\Cobilas.Unity.Editor.Management.Resource.asmdef
+- Change Runtime\Cobilas.Unity.Management.Resource.asmdef
+- Change Runtime\CobilasResources\CobilasResources.cs
 ## [1.0.7] 11/08/2022
 - Change Runtime\Cobilas.Unity.Management.Resource.asmdef
 ## [1.0.7] 09/08/2022

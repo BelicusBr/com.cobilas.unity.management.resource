@@ -5,18 +5,20 @@ using System.Collections;
 using Cobilas.Collections;
 using System.Collections.Generic;
 using Cobilas.Unity.Management.Build;
+using Cobilas.Unity.Management.RuntimeInitialize;
 using UEResources = UnityEngine.Resources;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 namespace Cobilas.Unity.Management.Resources {
-    [CreateAssetMenu(fileName = "CobilasResources", menuName = "Cobilas Resource Container")]
+    [CreateAssetMenu(fileName = "Resource Container", menuName = "Cobilas Resource/Container")]
     public class CobilasResources : ScriptableObject {
         [SerializeField] private ResourceItem[] itens;
 
 #if UNITY_EDITOR
-        [MenuItem("Tools/Cobilas/Refresh CobilasResources")]
+        [CRIOLM_BeforeSceneLoad]
+        [MenuItem("Tools/Cobilas Resource/Refresh CobilasResources")]
         private static void Refresh() {
             Debug.Log($"[Resources]Refresh resources paths[{System.DateTime.Now}]");
             ResourceItem[] resources = CreateResourceItemList(GetResourceObjects());
@@ -28,15 +30,19 @@ namespace Cobilas.Unity.Management.Resources {
             AssetDatabase.Refresh();
         }
 
+        [MenuItem("Tools/Cobilas Resource/Create Resources Folder")]
+        private static void CreateTranslationFolder() {
+            string path = Path.Combine(Application.dataPath, "Resources");
+            if (!Directory.Exists(path)) {
+                Directory.CreateDirectory(path);
+                AssetDatabase.Refresh();
+            }
+        }
+
         [InitializeOnLoadMethod]
         private static void Editor_Refresh() {
             CobilasBuildProcessor.EventOnPreprocessBuild += (pp, br) => {
                 if (pp == CobilasEditorProcessor.PriorityProcessor.Middle)
-                    Refresh();
-            };
-            CobilasEditorProcessor.playModeStateChanged += (pp, pm) => {
-                if (pp == CobilasEditorProcessor.PriorityProcessor.Middle &&
-                pm == PlayModeStateChange.EnteredPlayMode)
                     Refresh();
             };
         }

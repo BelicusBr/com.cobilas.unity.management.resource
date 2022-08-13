@@ -2,8 +2,7 @@
     "name": "Cobilas.Unity.Management.Resource",
     "references": [
         "Cobilas.Unity.Utility",
-        "Cobilas.Unity.Management.Runtime",
-        "Cobilas.Unity.Editor.Management.Runtime"
+        "Cobilas.Unity.Management.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

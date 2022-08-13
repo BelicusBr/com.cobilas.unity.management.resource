@@ -21,6 +21,10 @@
     "registry":"https://npm.pkg.github.com/@BelicusBr"
   },
   "relatedPackages": {
-    "com.cobilas.unity.management.resource": "1.0.7"
+    "com.cobilas.unity.management.resource": "1.0.7",
+	"com.cobilas.unity.management.resource": "1.0.6",
+	"com.cobilas.unity.management.resource": "1.0.5",
+	"com.cobilas.unity.management.resource": "1.0.4",
+	"com.cobilas.unity.management.resource": "1.0.0"
   }
 }
