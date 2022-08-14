@@ -1,0 +1,15 @@
+{
+    "name": "Cobilas.Unity.Test.Management.Resource",
+    "references": [
+        "Cobilas.Unity.Management.Resource"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

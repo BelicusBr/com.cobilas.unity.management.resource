@@ -4,11 +4,11 @@ using UnityEngine.Video;
 using System.Collections;
 using Cobilas.Collections;
 using System.Collections.Generic;
-using Cobilas.Unity.Management.Build;
 using Cobilas.Unity.Management.RuntimeInitialize;
 using UEResources = UnityEngine.Resources;
 #if UNITY_EDITOR
 using UnityEditor;
+using Cobilas.Unity.Management.Build;
 #endif
 
 namespace Cobilas.Unity.Management.Resources {
