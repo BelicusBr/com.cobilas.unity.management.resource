@@ -1,6 +1,6 @@
 {
   "name": "com.cobilas.unity.management.resource",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "displayName": "Cobilas Management Resource",
   "description": "Pacote de gerenciamento de recursos para unity3d",
     "licensesUrl": "https://github.com/BelicusBr/com.cobilas.unity.management.resource/blob/main/LICENSE.md",
@@ -21,6 +21,10 @@
     "registry":"https://npm.pkg.github.com/@BelicusBr"
   },
   "relatedPackages": {
-    "com.cobilas.unity.management.resource": "1.0.6"
+    "com.cobilas.unity.management.resource": "1.0.7",
+	"com.cobilas.unity.management.resource": "1.0.6",
+	"com.cobilas.unity.management.resource": "1.0.5",
+	"com.cobilas.unity.management.resource": "1.0.4",
+	"com.cobilas.unity.management.resource": "1.0.0"
   }
 }

@@ -1,6 +1,21 @@
 # Changelog
+## [1.0.7] 13/08/2022
+- Change Editor\Cobilas.Unity.Editor.Management.Resource.asmdef
+- Change Runtime\Cobilas.Unity.Management.Resource.asmdef
+- Change Runtime\CobilasResources\CobilasResources.cs
+## [1.0.7] 11/08/2022
+- Change Runtime\Cobilas.Unity.Management.Resource.asmdef
+## [1.0.7] 09/08/2022
+- Change CHANGELOG.md
+- Change Runtime\CobilasResources\CobilasResources.cs
+## [1.0.7] 08/08/2022
+- Fix CHANGELOG.md
+- Fix package.json
+- Remove CRItem.cs
+- Add CobilasResourcesInspector.cs
+- Change CobilasResources.cs
 ## [1.0.6] 31/07/2022
-- Add CHANGELOG.md
+- Fix CHANGELOG.md
 - Fix package.json
 - Add Cobilas MG Resources.asset
 - Remove Runtime\DependencyWarning.cs

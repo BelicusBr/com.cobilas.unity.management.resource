@@ -1,146 +1,147 @@
-﻿using System;
-using System.IO;
-using System.Xml;
+﻿using System.IO;
 using UnityEngine;
 using UnityEngine.Video;
+using System.Collections;
 using Cobilas.Collections;
-using Cobilas.Unity.Utility;
 using System.Collections.Generic;
 using Cobilas.Unity.Management.RuntimeInitialize;
+using UEResources = UnityEngine.Resources;
 #if UNITY_EDITOR
 using UnityEditor;
 using Cobilas.Unity.Management.Build;
 #endif
-using UEObject = UnityEngine.Object;
-using UEResources = UnityEngine.Resources;
 
 namespace Cobilas.Unity.Management.Resources {
-    public static class CobilasResources {
-        private static CRItem[] Prefabs;
-
-        [CRIOLM_BeforeSceneLoad(CRIOLMPriority.High)]
-        private static void Init() {
-            TextAsset text = UEResources.Load<TextAsset>("ResourcesPaths");
-            if (text != (TextAsset)null)
-                using (XmlReader reader = XmlReader.Create(new StringReader(text.text))) {
-                    using (ElementTag elemento = reader.GetElementTag()) {
-                        ElementTag[] tags = elemento.GetElementTags();
-                        for (int I = 0; I < ArrayManipulation.ArrayLength(tags); I++) {
-                            string RelativePath = GetRelativeAssetPath(tags[I].GetElementTag("RelativePath").Value.ValueToString);
-                            string VType = tags[I].GetElementTag("Type").Value.ValueToString;
-
-                            ArrayManipulation.Add(new CRItem(RelativePath, VType), ref Prefabs);
-                        }
-                    }
-                }
-
-            Application.quitting += () => {
-#if !UNITY_EDITOR
-                DescarregarAtivo(Prefabs);
-#endif
-                ArrayManipulation.ClearArraySafe(ref Prefabs);
-            };
-        }
-
-        private static string GetRelativeAssetPath(string path) {
-            path = path.Remove(0, path.IndexOf("/Resources") + 1);
-            return path.Contains('.') ? path.Remove(path.IndexOf('.')) : path;
-        }
+    [CreateAssetMenu(fileName = "Resource Container", menuName = "Cobilas Resource/Container")]
+    public class CobilasResources : ScriptableObject {
+        [SerializeField] private ResourceItem[] itens;
 
 #if UNITY_EDITOR
-        //private static string folderPathResources => Path.Combine(Application.dataPath, "Resources").Replace('\\', '/');
-        [InitializeOnLoadMethod]
-        private static void InitEditor() {
-            CobilasBuildProcessor.EventOnPreprocessBuild += (p, b)=> {
-                if (p == CobilasEditorProcessor.PriorityProcessor.Low)
-                    RefreshResourcesPaths();
-            };
-            CobilasEditorProcessor.playModeStateChanged += (p, pm) => {
-                if (p == CobilasEditorProcessor.PriorityProcessor.Low)
-                    if (pm == PlayModeStateChange.EnteredPlayMode)
-                        RefreshResourcesPaths();
-            };
-            DescarregarAtivo(Prefabs);
-            Init();
-        }
-
-        [MenuItem("Tools/Cobilas/Refresh Resources paths")]
-        private static void RefreshResourcesPaths() {
-            MonoBehaviour.print($"Refresh resources paths[{DateTime.Now}]");
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
-            settings.IndentChars = "\n";
-            using (FileStream stream = new FileStream($"{CobilasPaths.ResourcesPath}/ResourcesPaths.xml", FileMode.Create, FileAccess.Write, FileShare.Write)) {
-                using (XmlWriter writer = XmlWriter.Create(stream, settings)) {
-                    ElementTag Raiz = new ElementTag("ResourcesPaths");
-                    foreach (var item in GetRelativeFilesPtah()) {
-                        Raiz.Add(new ElementTag("Item",
-                            new ElementTag("RelativePath", item.Key),
-                            new ElementTag("Type", item.Value.AssemblyQualifiedName)
-                        ));
-                    }
-                    writer.WriteElementTag(Raiz);
-                }
+        [CRIOLM_BeforeSceneLoad]
+        [MenuItem("Tools/Cobilas Resource/Refresh CobilasResources")]
+        private static void Refresh() {
+            Debug.Log($"[Resources]Refresh resources paths[{System.DateTime.Now}]");
+            ResourceItem[] resources = CreateResourceItemList(GetResourceObjects());
+            foreach (var item in GetContainers()) {
+                item.UnloadResourceList();
+                item.itens = resources;
+                EditorUtility.SetDirty(item);
             }
             AssetDatabase.Refresh();
         }
 
-        private static KeyValuePair<string, Type>[] GetRelativeFilesPtah() {
-            KeyValuePair<string, Type>[] files = null;
-            UEObject[] objtemp = UEResources.LoadAll("");
-            for (int I = 0; I < ArrayManipulation.ArrayLength(objtemp); I++) {
-                if (objtemp[I].name != "ResourcesPaths")
-                    ArrayManipulation.Add(new KeyValuePair<string, Type>(
-                        AssetDatabase.GetAssetPath(objtemp[I]),
-                        objtemp[I].GetType()
-                        ), ref files);
-
+        [MenuItem("Tools/Cobilas Resource/Create Resources Folder")]
+        private static void CreateTranslationFolder() {
+            string path = Path.Combine(Application.dataPath, "Resources");
+            if (!Directory.Exists(path)) {
+                Directory.CreateDirectory(path);
+                AssetDatabase.Refresh();
             }
-            return files;
+        }
+
+        [InitializeOnLoadMethod]
+        private static void Editor_Refresh() {
+            CobilasBuildProcessor.EventOnPreprocessBuild += (pp, br) => {
+                if (pp == CobilasEditorProcessor.PriorityProcessor.Middle)
+                    Refresh();
+            };
+        }
+
+        private static IEnumerator<Object> GetResourceObjects() {
+            Object[] ass = UEResources.LoadAll("");
+            for (int I = 0; I < ArrayManipulation.ArrayLength(ass); I++)
+                if (ass[I].GetType() != typeof(CobilasResources))
+                    yield return ass[I];
+        }
+
+        private static ResourceItem[] CreateResourceItemList(IEnumerator<Object> enumerator) {
+            ResourceItem[] res = null;
+            while (enumerator.MoveNext()) {
+                string path = AssetDatabase.GetAssetPath(enumerator.Current);
+                path = path.Remove(0, path.IndexOf("/Resources") + 1);
+                ArrayManipulation.Add(new ResourceItem(enumerator.Current, Path.GetDirectoryName(path).Replace('\\', '/')), ref res);
+            }
+            return res;
         }
 #endif
-        public static string[] GetAllResourcesPaths() {
-            string[] res = null;
-            for (int I = 0; I < ArrayManipulation.ArrayLength(Prefabs); I++)
-                ArrayManipulation.Add(Prefabs[I].RelativePath, ref res);
+
+        private void UnloadResourceList() {
+            for (int I = 0; I < ArrayManipulation.ArrayLength(itens); I++)
+                itens[I].Dispose();
+            ArrayManipulation.ClearArraySafe(ref itens);
+        }
+
+        public static bool ContainsResourceItem(string name) {
+            foreach (var item in GetContainers()) {
+                for (int I = 0; I < ArrayManipulation.ArrayLength(item.itens); I++)
+                    if (item.itens[I].Name == name)
+                        return true;
+                break;
+            }
+            return false;
+        }
+
+        public static Object[] GetAllObject() {
+            Object[] res = null;
+            foreach (var item in GetContainers()) {
+                res = new Object[ArrayManipulation.ArrayLength(item.itens)];
+                for (int I = 0; I < res.Length; I++)
+                    res[I] = item.itens[I].Item;
+                break;
+            }
             return res;
         }
 
-        public static UEObject[] GetAllObject() {
-            UEObject[] Res = null;
-            for (int I = 0; I < ArrayManipulation.ArrayLength(Prefabs); I++)
-                ArrayManipulation.Add(LoadObject(Prefabs[I]), ref Res);
-            return Res;
+        public static T[] GetAllSpecificObject<T>() where T : Object {
+            T[] res = null;
+            foreach (var item in GetContainers()) {
+                for (int I = 0; I < ArrayManipulation.ArrayLength(item.itens); I++)
+                    if (item.itens[I] == typeof(T))
+                        ArrayManipulation.Add((T)item.itens[I].Item, ref res);
+                break;
+            }
+            return res;
         }
 
-        public static T[] GetAllSpecificObject<T>() where T : UEObject {
-            T[] Res = null;
-            for (int I = 0; I < ArrayManipulation.ArrayLength(Prefabs); I++)
-                if (Prefabs[I] == typeof(T))
-                    ArrayManipulation.Add(LoadObject<T>(Prefabs[I]), ref Res);
-            return Res;
+        public static Object[] GetAllObjectInFolder(string relativeFolder) {
+            Object[] res = null;
+            foreach (var item in GetContainers()) {
+                for (int I = 0; I < ArrayManipulation.ArrayLength(item.itens); I++)
+                    if (item.itens[I] == relativeFolder)
+                        ArrayManipulation.Add(item.itens[I].Item, ref res);
+                break;
+            }
+            return res;
         }
 
-        public static UEObject[] GetAllObjectInFolder(string relativeFolder) {
-            UEObject[] Res = null;
-            for (int I = 0; I < ArrayManipulation.ArrayLength(Prefabs); I++)
-                if (Prefabs[I] == relativeFolder)
-                    ArrayManipulation.Add(LoadObject(Prefabs[I]), ref Res);
-            return Res;
+        public static T[] GetAllSpecificObjectInFolder<T>(string relativeFolder) where T : Object {
+            T[] res = null;
+            foreach (var item in GetContainers()) {
+                for (int I = 0; I < ArrayManipulation.ArrayLength(item.itens); I++)
+                    if (item.itens[I] == relativeFolder && item.itens[I] == typeof(T))
+                        ArrayManipulation.Add((T)item.itens[I].Item, ref res);
+                break;
+            }
+            return res;
         }
 
-        public static T[] GetAllSpecificObjectInFolder<T>(string relativeFolder) where T : UEObject {
-            T[] Res = null;
-            for (int I = 0; I < ArrayManipulation.ArrayLength(Prefabs); I++)
-                if (Prefabs[I] == typeof(T) && Prefabs[I] == relativeFolder)
-                    ArrayManipulation.Add(LoadObject<T>(Prefabs[I]), ref Res);
-            return Res;
+        public static Object GetObject(string name) {
+            foreach (var item in GetContainers()) {
+                for (int I = 0; I < ArrayManipulation.ArrayLength(item.itens); I++)
+                    if (item.itens[I] == name)
+                        return item.itens[I].Item;
+                break;
+            }
+            return null;
         }
 
-        public static T GetObject<T>(string name) where T : UEObject {
-            for (int I = 0; I < ArrayManipulation.ArrayLength(Prefabs); I++)
-                if (Prefabs[I] == name && Prefabs[I] == typeof(T))
-                    return LoadObject<T>(Prefabs[I]);
+        public static T GetObject<T>(string name) where T : Object {
+            foreach (var item in GetContainers()) {
+                for (int I = 0; I < ArrayManipulation.ArrayLength(item.itens); I++)
+                    if (item.itens[I] == name && item.itens[I] == typeof(T))
+                        return (T)item.itens[I].Item;
+                break;
+            }
             return (T)null;
         }
 
@@ -154,6 +155,12 @@ namespace Cobilas.Unity.Management.Resources {
             => GetObject<Texture>(name);
 
         public static T GetTexture<T>(string name) where T : Texture
+            => GetObject<T>(name);
+
+        public static ScriptableObject GetScriptableObject(string name)
+            => GetObject<ScriptableObject>(name);
+
+        public static T GetScriptableObject<T>(string name) where T : ScriptableObject
             => GetObject<T>(name);
 
         public static Sprite GetSprite(string name)
@@ -171,19 +178,23 @@ namespace Cobilas.Unity.Management.Resources {
         public static T GetComponentInGameObject<T>(string name)
             => GetGameObject(name).GetComponent<T>();
 
-        private static void DescarregarAtivo(CRItem[] list) {
-            for (int I = 0; I < ArrayManipulation.ArrayLength(list); I++)
-                list[I].Dispose();
+        private static CRC GetContainers() => new CRC(GetCobilasResourceContainers());
+
+        private static IEnumerator<CobilasResources> GetCobilasResourceContainers() {
+            CobilasResources[] ass = UEResources.LoadAll<CobilasResources>("");
+            for (int I = 0; I < ArrayManipulation.ArrayLength(ass); I++)
+                yield return ass[I];
         }
 
-        private static UEObject LoadObject(CRItem item) {
-            string path = item.RelativePath.Remove(0, item.RelativePath.IndexOf('/') + 1);
-            return UEResources.Load(path);
-        }
+        private struct CRC : IEnumerable<CobilasResources> {
 
-        private static T LoadObject<T>(CRItem item) where T : UEObject {
-            string path = item.RelativePath.Remove(0, item.RelativePath.IndexOf('/') + 1);
-            return UEResources.Load<T>(path);
+            private IEnumerator<CobilasResources> enumerator;
+
+            public CRC(IEnumerator<CobilasResources> enumerator) => this.enumerator = enumerator;
+
+            public IEnumerator<CobilasResources> GetEnumerator() => enumerator;
+
+            IEnumerator IEnumerable.GetEnumerator() => enumerator;
         }
     }
 }
