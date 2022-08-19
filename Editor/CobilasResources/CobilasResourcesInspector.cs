@@ -8,7 +8,6 @@ namespace Cobilas.Unity.Editor.Management.Resources {
     public class CobilasResourceContainerInspector : UEEditor {
 
         private MSerializedProperty[] properties;
-        private Vector2 scrollView;
 
         private void OnEnable() {
             SerializedProperty resourceList = serializedObject.FindProperty("itens");
@@ -22,7 +21,6 @@ namespace Cobilas.Unity.Editor.Management.Resources {
         }
 
         public override void OnInspectorGUI() {
-            scrollView = EditorGUILayout.BeginScrollView(scrollView);
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.LabelField("Resources", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
@@ -44,7 +42,6 @@ namespace Cobilas.Unity.Editor.Management.Resources {
             }
             EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
-            EditorGUILayout.EndScrollView();
         }
 
         private struct MSerializedProperty {
