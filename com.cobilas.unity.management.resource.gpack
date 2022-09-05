@@ -1,9 +1,10 @@
 {
     "name": "com.cobilas.unity.management.resource",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "repository": "https://github.com/BelicusBr/com.cobilas.unity.management.resource.git",
     "relatedPackages": [
-        "1.0.8"
+        "1.0.8",
+		"1.0.9"
     ],
     "gitDependencies": [
         {

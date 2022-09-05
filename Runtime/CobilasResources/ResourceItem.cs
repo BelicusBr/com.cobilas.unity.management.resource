@@ -23,7 +23,9 @@ namespace Cobilas.Unity.Management.Resources {
         }
 
         public bool Equals(string other)
-            => other == relativePath || other == GetItemName();
+            => other == relativePath || 
+            other ==  relativePath.Replace("Resources/", string.Empty).Replace("Resources", string.Empty) || 
+            other == GetItemName();
 
         public bool Equals(Type other) {
             if (item == null) return false;
