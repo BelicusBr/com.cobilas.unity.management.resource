@@ -65,7 +65,7 @@ namespace Cobilas.Unity.Editor.Management.Resources.Asset {
                 if (temp.MyObject != null && temp.UseTargetObjectName) {
                     AssetDatabase.RenameAsset(
                         AssetDatabase.GetAssetPath(temp),
-                        CobilasPaths.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(temp.MyObject))
+                        UnityPath.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(temp.MyObject))
                     );
                     AssetDatabase.Refresh();
                 }

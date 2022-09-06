@@ -8,10 +8,10 @@ using Cobilas.Unity.Utility;
 namespace Cobilas.Unity.Editor.Management.Resources.Asset {
     public static class CobilasAssetManagementWin {
 
-        private static string camFolderPath => CobilasPaths.Combine(
-            CobilasPaths.GetDirectoryName(CobilasPaths.AssetsPath),
+        private static string camFolderPath => UnityPath.Combine(
+            UnityPath.GetDirectoryName(UnityPath.AssetsPath),
             "AssetBundle");
-        private static string camBilder => CobilasPaths.Combine(CobilasPaths.AssetsPath, "AssetBundleBild");
+        private static string camBilder => UnityPath.Combine(UnityPath.AssetsPath, "AssetBundleBild");
 
         [InitializeOnLoadMethod]
         private static void Init() {
@@ -35,7 +35,7 @@ namespace Cobilas.Unity.Editor.Management.Resources.Asset {
             for (int I = 0; I < ArrayManipulation.ArrayLength(itemRefs); I++) {
                 string relativePath = AssetDatabase.GetAssetPath(itemRefs[I]);
                 if (!relativePath.Contains("Assets/AssetBundleBild")) continue;
-                string relativePath2 = CobilasPaths.GetDirectoryName(relativePath);
+                string relativePath2 = UnityPath.GetDirectoryName(relativePath);
 
                 DLCItemPath dLCtemp = DLCItemPath.GetDLCItemPath(
                     DLCItemPath.GetDLCName(AssetsItemPaths.RemoveAssetBundleBildPath(relativePath2)), dLCs);
@@ -66,7 +66,7 @@ namespace Cobilas.Unity.Editor.Management.Resources.Asset {
                     ArrayManipulation.Add(build, ref builds);
 
                 }
-                camdlcpath = CobilasPaths.Combine(camFolderPath, $"CTOR_{dLCs[I].name}");
+                camdlcpath = UnityPath.Combine(camFolderPath, $"CTOR_{dLCs[I].name}");
 
                 ClearAssetBundle(camdlcpath);
                 _ = BuildPipeline.BuildAssetBundles($"AssetBundle/CTOR_{dLCs[I].name}", builds, BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);

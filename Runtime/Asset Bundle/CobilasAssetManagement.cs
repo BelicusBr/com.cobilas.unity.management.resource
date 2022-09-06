@@ -14,8 +14,8 @@ namespace Cobilas.Unity.Management.Resources.Asset {
         private static List<AssetBundle> bundles = null;
 
 #if UNITY_EDITOR
-        public static string camFolder => CobilasPaths.Combine(CobilasPaths.ResourcesPath, "camFolder");
-        public static string camFile => CobilasPaths.Combine(camFolder, "camDefaultPath.txt");
+        public static string camFolder => UnityPath.Combine(UnityPath.ResourcesPath, "camFolder");
+        public static string camFile => UnityPath.Combine(camFolder, "camDefaultPath.txt");
 #endif
         public static int AssetsCount => bundles == null ? 0 : bundles.Count;
 
