@@ -2,7 +2,8 @@
     "name": "Cobilas.Unity.Editor.Management.Resource",
     "references": [
         "Cobilas.Unity.Utility",
-        "Cobilas.Unity.Management.Resource"
+        "Cobilas.Unity.Management.Resource",
+        "Cobilas.Core"
     ],
     "includePlatforms": [
         "Editor"
@@ -10,9 +11,7 @@
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
-    "precompiledReferences": [
-        "Cobilas.Collections.dll"
-    ],
+    "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [
         "UNITY_EDITOR"

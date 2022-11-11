@@ -2,16 +2,14 @@
     "name": "Cobilas.Unity.Management.Resource",
     "references": [
         "Cobilas.Unity.Utility",
-        "Cobilas.Unity.Management.Runtime"
+        "Cobilas.Unity.Management.Runtime",
+        "Cobilas.Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
-    "precompiledReferences": [
-        "Cobilas.Collections.dll",
-        "CobilasCore.Extension.dll"
-    ],
+    "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
