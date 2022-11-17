@@ -4,7 +4,7 @@ using UnityEngine.Video;
 using System.Collections;
 using Cobilas.Collections;
 using System.Collections.Generic;
-using Cobilas.Unity.Management.RuntimeInitialize;
+using Cobilas.Unity.Management.Runtime;
 using UEResources = UnityEngine.Resources;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -17,7 +17,7 @@ namespace Cobilas.Unity.Management.Resources {
         [SerializeField] private ResourceItem[] itens;
 
 #if UNITY_EDITOR
-        [CRIOLM_BeforeSceneLoad]
+        [StartBeforeSceneLoad("#ResourceManager")]
         [MenuItem("Tools/Cobilas Resource/Refresh CobilasResources")]
         private static void Refresh() {
             Debug.Log($"[Resources]Refresh resources paths[{System.DateTime.Now}]");

@@ -3,14 +3,14 @@ using UnityEngine;
 using Cobilas.Collections;
 using Cobilas.Unity.Utility;
 using System.Collections.Generic;
-using Cobilas.Unity.Management.RuntimeInitialize;
+using Cobilas.Unity.Management.Runtime;
 //using UEResources = UnityEngine.Resources;
 
 namespace Cobilas.Unity.Management.Resources.Asset {
     //Assets/Resources/Translation/PT-BR-TDS.alfbt
     public static class CobilasAssetManagement {
-        public const string camVersion = "1.7";
-        public const string camDefaultPathRes = "camDefaultPath";
+        //public const string camVersion = "1.7";
+        //public const string camDefaultPathRes = "camDefaultPath";
         private static List<AssetBundle> bundles = null;
 
 #if UNITY_EDITOR
@@ -19,25 +19,9 @@ namespace Cobilas.Unity.Management.Resources.Asset {
 #endif
         public static int AssetsCount => bundles == null ? 0 : bundles.Count;
 
-        [CRIOLM_BeforeSceneLoad]
-        private static void Init() {
-            //try {
-            //    bundles = new List<AssetBundle>();
-            //    string relativePath = UEResources.Load<TextAsset>("camFolder/camDefaultPath").text;
-            //    string[] dirs = Directory.GetDirectories(Path.Combine(Application.streamingAssetsPath, relativePath));
-            //    for (int I = 0; I < ArrayManipulation.ArrayLength(dirs); I++) {
-            //        AssetBundle bundle = AssetBundle.LoadFromFile(Path.Combine(dirs[I], Path.GetFileName(dirs[I])));
-            //        AssetBundleManifest manifest = bundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
-            //        string[] man = manifest.GetAllAssetBundles();
-            //        for (int J = 0; J < ArrayManipulation.ArrayLength(man); J++)
-            //            bundles.Add(AssetBundle.LoadFromFile(Path.Combine(dirs[I], man[J])));
-            //    }
-            //} catch {
-            //    MonoBehaviour.print("CAM Load failed!");
-            //}
-
-            Application.quitting += () => AssetBundle.UnloadAllAssetBundles(true);
-        }
+        [StartBeforeSceneLoad]
+        private static void Init()
+            => Application.quitting += () => AssetBundle.UnloadAllAssetBundles(true);
 
         public static void LoadAssetBundle(string relativePath) {
             if (bundles == null) bundles = new List<AssetBundle>();
