@@ -1,4 +1,7 @@
 # Changelog
+## [1.0.11] 17/11/2022
+#### Change 1
+O `CobilasResources` e `CobilasAssetManagement` estão usando o novo `StartMethodOnRun` para inicialização.
 ## [1.0.7] 13/08/2022
 - Change Editor\Cobilas.Unity.Editor.Management.Resource.asmdef
 - Change Runtime\Cobilas.Unity.Management.Resource.asmdef
