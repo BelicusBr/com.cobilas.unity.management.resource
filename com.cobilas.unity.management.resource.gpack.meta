@@ -1,7 +1,12 @@
 fileFormatVersion: 2
 guid: 37f16095158c7814cb585f7bcbfec646
 DefaultImporter:
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: Cobilas.Unity.Test.Editor.GitPackage:GitPackageManagerWin/GPack
+      assembly: Cobilas.Unity.Test.Editor.GitPackage
+      name: com.cobilas.unity.management.resource
+    second: {fileID: 102900000, guid: 37f16095158c7814cb585f7bcbfec646, type: 3}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
