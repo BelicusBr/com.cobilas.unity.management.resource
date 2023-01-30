@@ -20,7 +20,9 @@ namespace Cobilas.Unity.Management.Resources.Asset {
         public static int AssetsCount => bundles == null ? 0 : bundles.Count;
 
         [StartBeforeSceneLoad]
+#pragma warning disable IDE0051 // Remover membros privados não utilizados
         private static void Init()
+#pragma warning restore IDE0051 // Remover membros privados não utilizados
             => Application.quitting += () => AssetBundle.UnloadAllAssetBundles(true);
 
         public static void LoadAssetBundle(string relativePath) {

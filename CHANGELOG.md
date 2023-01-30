@@ -1,4 +1,11 @@
 # Changelog
+## [1.0.12] - 30/01/2023
+### Changed
+#### CobilasAssetManagementWin
+- Remoção de atribuições desnecessárias.
+#### CobilasResources
+- O método `T:GetComponentInGameObject<T>(string)` recebeu a restrição `where T : Component`.
+- Transformando possiveis campos em `readonly`.
 ## [1.0.11] 17/11/2022
 #### Change 1
 O `CobilasResources` e `CobilasAssetManagement` estão usando o novo `StartMethodOnRun` para inicialização.

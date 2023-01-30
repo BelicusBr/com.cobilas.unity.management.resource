@@ -175,7 +175,7 @@ namespace Cobilas.Unity.Management.Resources {
         public static GameObject GetGameObject(string name)
             => GetObject<GameObject>(name);
 
-        public static T GetComponentInGameObject<T>(string name)
+        public static T GetComponentInGameObject<T>(string name) where T : Component
             => GetGameObject(name).GetComponent<T>();
 
         private static CRC GetContainers() => new CRC(GetCobilasResourceContainers());
@@ -188,7 +188,7 @@ namespace Cobilas.Unity.Management.Resources {
 
         private struct CRC : IEnumerable<CobilasResources> {
 
-            private IEnumerator<CobilasResources> enumerator;
+            private readonly IEnumerator<CobilasResources> enumerator;
 
             public CRC(IEnumerator<CobilasResources> enumerator) => this.enumerator = enumerator;
 

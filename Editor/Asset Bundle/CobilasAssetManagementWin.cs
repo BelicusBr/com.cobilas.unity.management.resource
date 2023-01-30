@@ -58,7 +58,7 @@ namespace Cobilas.Unity.Editor.Management.Resources.Asset {
 
             for (int I = 0; I < ArrayManipulation.ArrayLength(dLCs); I++) {
                 AssetBundleBuild[] builds = null;
-                string camdlcpath = null;
+                string camdlcpath;
                 for (int J = 0; J < ArrayManipulation.ArrayLength(dLCs[I].paths); J++) {
                     AssetBundleBuild build = new AssetBundleBuild();
                     build.assetBundleName = dLCs[I].paths[J].assetBundleName;
