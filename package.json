@@ -1,6 +1,6 @@
 {
   "name": "com.cobilas.unity.management.resource",
-  "version": "1.0.12",
+  "version": "1.13.0",
   "displayName": "Cobilas Management Resource",
   "description": "Pacote de gerenciamento de recursos para unity3d",
   "licensesUrl": "https://github.com/BelicusBr/com.cobilas.unity.management.resource/blob/main/LICENSE.md",
@@ -26,5 +26,10 @@
     "C#",
     "CSharp"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "com.cobilas.core": "^2.0.0",
+    "com.cobilas.unity.utility": "^2.6.0",
+    "com.cobilas.unity.management.runtime": "^1.14.0"
+  }
 }
