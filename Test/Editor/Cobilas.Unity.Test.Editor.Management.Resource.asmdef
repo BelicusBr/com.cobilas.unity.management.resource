@@ -1,8 +1,9 @@
 {
-    "name": "Cobilas.Unity.Editor.Management.Resource",
+    "name": "Cobilas.Unity.Test.Editor.Management.Resource",
     "references": [
         "Cobilas.Core",
-        "Cobilas.Unity.Utility",
+        "Cobilas.Unity.Editor.Utility",
+        "Cobilas.Unity.Editor.Extensions",
         "Cobilas.Unity.Management.Resource"
     ],
     "includePlatforms": [
