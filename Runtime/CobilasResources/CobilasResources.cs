@@ -4,11 +4,11 @@ using UnityEngine.Video;
 using System.Collections;
 using Cobilas.Collections;
 using System.Collections.Generic;
-using Cobilas.Unity.Management.Runtime;
 using UEResources = UnityEngine.Resources;
 #if UNITY_EDITOR
 using UnityEditor;
 using Cobilas.Unity.Management.Build;
+using Cobilas.Unity.Management.Runtime;
 #endif
 
 namespace Cobilas.Unity.Management.Resources {
@@ -63,13 +63,13 @@ namespace Cobilas.Unity.Management.Resources {
             }
             return res;
         }
-#endif
 
         private void UnloadResourceList() {
             for (int I = 0; I < ArrayManipulation.ArrayLength(itens); I++)
                 itens[I].Dispose();
             ArrayManipulation.ClearArraySafe(ref itens);
         }
+#endif
 
         public static bool ContainsResourceItem(string name) {
             foreach (var item in GetContainers()) {

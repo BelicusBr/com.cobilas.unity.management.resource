@@ -1,6 +1,10 @@
 {
     "name": "Cobilas.Unity.Test.Management.Resource",
     "references": [
+        "Cobilas.Core",
+        "Cobilas.Unity.Utility",
+        "Cobilas.Unity.Extensions",
+        "Cobilas.Unity.Management.Runtime",
         "Cobilas.Unity.Management.Resource"
     ],
     "includePlatforms": [],
@@ -9,7 +13,9 @@
     "overrideReferences": true,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [],
+    "defineConstraints": [
+        "UNITY_EDITOR"
+    ],
     "versionDefines": [],
     "noEngineReferences": false
 }
