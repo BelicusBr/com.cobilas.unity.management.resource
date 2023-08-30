@@ -1,4 +1,10 @@
 # Changelog
+## [1.14.0] - 29/08/2023
+## Changed
+- As dependencias do pacote foram aluteradas.
+## [1.13.0-ch1] - 28/08/2023
+### Changed
+- O autor do pacote foi alterado de `Cobilas CTB` para `BélicusBr`.
 ## [1.0.12] - 30/01/2023
 ### Changed
 #### CobilasAssetManagementWin
