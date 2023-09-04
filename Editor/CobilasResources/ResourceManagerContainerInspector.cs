@@ -4,8 +4,8 @@ using Cobilas.Unity.Management.Resources;
 using UEEditor = UnityEditor.Editor;
 
 namespace Cobilas.Unity.Editor.Management.Resources {
-    [CustomEditor(typeof(CobilasResources))]
-    public class CobilasResourceContainerInspector : UEEditor {
+    [CustomEditor(typeof(ResourceManager), true)]
+    public class ResourceManagerContainerInspector : UEEditor {
 
         private MSerializedProperty[] properties;
 
