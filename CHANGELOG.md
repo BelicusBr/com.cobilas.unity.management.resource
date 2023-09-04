@@ -1,6 +1,11 @@
 # Changelog
+## [2.0.0] - 03/09/2023
+### Added
+- A classe `ResourceManager` foi adicionada.
+### Deprecate
+- A classe `CobilasResources` foi substituida pela classe `ResourceManager`.
 ## [1.14.0] - 29/08/2023
-## Changed
+### Changed
 - As dependencias do pacote foram aluteradas.
 ## [1.13.0-ch1] - 28/08/2023
 ### Changed
