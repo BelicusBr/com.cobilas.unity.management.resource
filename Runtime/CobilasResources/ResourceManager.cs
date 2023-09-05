@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using UnityEngine;
 using UnityEngine.Video;
-using System.Collections;
 using Cobilas.Collections;
+using Cobilas.Unity.Utility;
 using System.Collections.Generic;
 using UEResources = UnityEngine.Resources;
 #if UNITY_EDITOR
@@ -70,6 +70,24 @@ namespace Cobilas.Unity.Management.Resources {
             ArrayManipulation.ClearArraySafe(ref itens);
         }
 #endif
+        public static void LoadAssetBundle(string folderPath) {
+            AssetBundle bundle = AssetBundle.LoadFromFile(UnityPath.Combine(folderPath, UnityPath.GetFileName(folderPath)));
+            AssetBundleManifest manifest = bundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+            string[] subdirs = manifest.GetAllAssetBundles();
+            CRC crc = GetContainers();
+            for (int J = 0; J < ArrayManipulation.ArrayLength(subdirs); J++) {
+                Object[] objs = AssetBundle.LoadFromFile(UnityPath.Combine(folderPath, subdirs[J])).LoadAllAssets();
+                for (int I = 0; I < ArrayManipulation.ArrayLength(objs); I++)
+                    foreach (var containers in crc)
+                        ArrayManipulation.Add(new ResourceItem(objs[I], UnityPath.GetDirectoryName(subdirs[J])), 
+                            ref containers.itens);
+            }
+        }
+
+        public static void LoadAssetBundle(params string[] folderPaths) {
+            for (int I = 0; I < ArrayManipulation.ArrayLength(folderPaths); I++)
+                LoadAssetBundle(folderPaths[I]);
+        }
 
         public static bool ContainsResourceItem(string name) {
             foreach (var item in GetContainers()) {
@@ -178,23 +196,6 @@ namespace Cobilas.Unity.Management.Resources {
         public static T GetComponentInGameObject<T>(string name) where T : Component
             => GetGameObject(name).GetComponent<T>();
 
-        private static CRC GetContainers() => new CRC(GetCobilasResourceContainers());
-
-        private static IEnumerator<ResourceManager> GetCobilasResourceContainers() {
-            ResourceManager[] ass = UEResources.LoadAll<ResourceManager>("");
-            for (int I = 0; I < ArrayManipulation.ArrayLength(ass); I++)
-                yield return ass[I];
-        }
-
-        private struct CRC : IEnumerable<ResourceManager> {
-
-            private readonly IEnumerator<ResourceManager> enumerator;
-
-            public CRC(IEnumerator<ResourceManager> enumerator) => this.enumerator = enumerator;
-
-            public IEnumerator<ResourceManager> GetEnumerator() => enumerator;
-
-            IEnumerator IEnumerable.GetEnumerator() => enumerator;
-        }
+        private static CRC GetContainers() => new CRC(UEResources.LoadAll<ResourceManager>(""));
     }
 }

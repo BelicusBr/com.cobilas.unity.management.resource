@@ -1,5 +1,16 @@
 # Changelog
-## [2.0.0] - 03/09/2023
+## [2.0.0] - 05/09/2023
+### Changed
+- As fuções da classe `CobilasAssetManagement` foram incorporadas a classe `ResourceManager`.
+- A estrutura `CRC` foi movida para `CRC.cs` e também ela se tornou somente leitura.
+### Removed
+```c#
+    public static class CobilasAssetManagementWin;
+    public class AssetsItemRefDraw;
+    public class AssetsItemRef;
+    public static class CobilasAssetManagement;
+```
+## [2.0.0-rc1] - 03/09/2023
 ### Added
 - A classe `ResourceManager` foi adicionada.
 ### Deprecate
