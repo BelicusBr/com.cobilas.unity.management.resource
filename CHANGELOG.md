@@ -1,4 +1,7 @@
 # Changelog
+## [2.0.1] - 06/09/2023
+### Fixed
+- Correção nas dependencias do pacote.
 ## [2.0.0] - 05/09/2023
 ### Changed
 - As fuções da classe `CobilasAssetManagement` foram incorporadas a classe `ResourceManager`.
