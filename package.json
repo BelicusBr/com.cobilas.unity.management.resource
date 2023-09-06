@@ -1,6 +1,6 @@
 {
   "name": "com.cobilas.unity.management.resource",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "displayName": "Cobilas Management Resource",
   "description": "Pacote de gerenciamento de recursos para unity3d",
   "licensesUrl": "https://github.com/BelicusBr/com.cobilas.unity.management.resource/blob/main/LICENSE.md",
@@ -30,6 +30,6 @@
   "dependencies": {
     "com.cobilas.unity.utility": "2.9.0",
     "com.cobilas.unity.management.runtime": "2.0.0",
-    "com.cobilas.unity.managecom.unity.assetbundlebrowserment.runtime": "1.7.0"
+    "com.unity.assetbundlebrowser": "1.7.0"
   }
 }
