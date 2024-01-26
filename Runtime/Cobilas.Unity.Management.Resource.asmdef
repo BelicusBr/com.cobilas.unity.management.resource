@@ -1,6 +1,7 @@
 {
     "name": "Cobilas.Unity.Management.Resource",
     "references": [
+        "Cobilas.Core.Net4x",
         "Cobilas.Unity.Utility",
         "Cobilas.Unity.Management.Runtime",
         "Cobilas.Unity.Management.Runtime.Build"

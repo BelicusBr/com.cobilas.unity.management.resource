@@ -1,39 +1,42 @@
 # Changelog
+## [2.1.0] 25/01/2024
+### Changed
+A change in package dependencies.
 ## [2.0.1] - 06/09/2023
-### Fixed
-- Correção nas dependencias do pacote.
+###Fixed
+- Correction in package dependencies.
 ## [2.0.0] - 05/09/2023
 ### Changed
-- As fuções da classe `CobilasAssetManagement` foram incorporadas a classe `ResourceManager`.
-- A estrutura `CRC` foi movida para `CRC.cs` e também ela se tornou somente leitura.
+- The functions of the `CobilasAssetManagement` class were incorporated into the `ResourceManager` class.
+- The `CRC` structure has been moved to `CRC.cs` and has also become read-only.
 ### Removed
 ```c#
-    public static class CobilasAssetManagementWin;
-    public class AssetsItemRefDraw;
-    public class AssetsItemRef;
-    public static class CobilasAssetManagement;
+     public static class CobilasAssetManagementWin;
+     public class AssetsItemRefDraw;
+     public class AssetsItemRef;
+     public static class CobilasAssetManagement;
 ```
 ## [2.0.0-rc1] - 03/09/2023
 ### Added
-- A classe `ResourceManager` foi adicionada.
+- The `ResourceManager` class has been added.
 ### Deprecate
-- A classe `CobilasResources` foi substituida pela classe `ResourceManager`.
+- The `CobilasResources` class has been replaced by the `ResourceManager` class.
 ## [1.14.0] - 29/08/2023
 ### Changed
-- As dependencias do pacote foram aluteradas.
+- Package dependencies have been changed.
 ## [1.13.0-ch1] - 28/08/2023
 ### Changed
-- O autor do pacote foi alterado de `Cobilas CTB` para `BélicusBr`.
+- The package author was changed from `Cobilas CTB` to `BélicusBr`.
 ## [1.0.12] - 30/01/2023
 ### Changed
 #### CobilasAssetManagementWin
-- Remoção de atribuições desnecessárias.
+- Removal of unnecessary assignments.
 #### CobilasResources
-- O método `T:GetComponentInGameObject<T>(string)` recebeu a restrição `where T : Component`.
-- Transformando possiveis campos em `readonly`.
-## [1.0.11] 17/11/2022
+- The `T:GetComponentInGameObject<T>(string)` method received the `where T : Component` restriction.
+- Transforming possible fields into `readonly`.
+## [1.0.11] 17/11/2021
 #### Change 1
-O `CobilasResources` e `CobilasAssetManagement` estão usando o novo `StartMethodOnRun` para inicialização.
+`CobilasResources` and `CobilasAssetManagement` are using the new `StartMethodOnRun` for initialization.
 ## [1.0.7] 13/08/2022
 - Change Editor\Cobilas.Unity.Editor.Management.Resource.asmdef
 - Change Runtime\Cobilas.Unity.Management.Resource.asmdef
@@ -49,7 +52,7 @@ O `CobilasResources` e `CobilasAssetManagement` estão usando o novo `StartMetho
 - Remove CRItem.cs
 - Add CobilasResourcesInspector.cs
 - Change CobilasResources.cs
-## [1.0.6] 31/07/2022
+## [1.0.6] 31/07/2021
 - Fix CHANGELOG.md
 - Fix package.json
 - Add Cobilas MG Resources.asset
@@ -59,7 +62,7 @@ O `CobilasResources` e `CobilasAssetManagement` estão usando o novo `StartMetho
 - Fix CHANGELOG.md
 - Fix package.json
 - Fix CobilasResources.cs
-- > As instruções `void DescarregarAtivo(Prefabs); void Init();` foram adicionados o a método `private static void InitEditor();`.
+-> The instructions `void UnloadActive(Prefabs); void Init();` the `private static void InitEditor();` method was added.
 ## [1.0.4] 23/07/2022
 - Fix Runtime/DependencyWarning.cs
 - Add CHANGELOG.md
@@ -80,5 +83,5 @@ O `CobilasResources` e `CobilasAssetManagement` estão usando o novo `StartMetho
 - Add folder:Editor
 - Add folder:Runtime
 ## [0.0.1] 15/07/2022
-### Repositorio com.cobilas.unity.management.resource iniciado
-- Lançado para o GitHub
+### Repository com.cobilas.unity.management.resource started
+- Released to GitHub

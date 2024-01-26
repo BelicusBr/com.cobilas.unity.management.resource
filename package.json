@@ -1,8 +1,8 @@
 {
   "name": "com.cobilas.unity.management.resource",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "displayName": "Cobilas Management Resource",
-  "description": "Pacote de gerenciamento de recursos para unity3d",
+  "description": "Resource management package for unity3d.",
   "licensesUrl": "https://github.com/BelicusBr/com.cobilas.unity.management.resource/blob/main/LICENSE.md",
   "changelogUrl": "https://github.com/BelicusBr/com.cobilas.unity.management.resource/blob/main/CHANGELOG.md",
   "unity": "2019.1",
@@ -19,7 +19,8 @@
   "homepage": "https://github.com/BelicusBr/com.cobilas.unity.management.resource#readme",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init_pack": "npm pack --pack-destination C:/local.npm"
   },
   "keywords": [
     "unity3d",
@@ -28,8 +29,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "com.cobilas.unity.utility": "2.9.0",
-    "com.cobilas.unity.management.runtime": "2.0.0",
+    "com.cobilas.unity.utility": "2.10.1",
+    "com.cobilas.unity.management.runtime": "2.1.0",
     "com.unity.assetbundlebrowser": "1.7.0"
   }
 }
