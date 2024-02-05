@@ -1,4 +1,10 @@
 # Changelog
+## [2.1.1] (05/02/2024)
+- ### Changed
+- - Updated dependency `com.cobilas.unity.utility` to version `2.10.3`.
+- - Updated dependency `com.cobilas.unity.management.runtime` to version `2.2.1`.
+- - This update includes bug fixes and new features that do not directly impact this package.
+- - The sub-dependency `com.cobilas.unity.core.net4x@1.4.1` was made explicit in the package dependencies.
 ## [2.1.0] 25/01/2024
 ### Changed
 A change in package dependencies.
